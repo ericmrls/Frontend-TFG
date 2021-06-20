@@ -1,0 +1,65 @@
+<hr class="mt-2 mb-3"/>
+<h2 class="display-4 text-center">Noticias visitadas</h2>
+<hr class="mt-2 mb-3"/>
+<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="row mb-2">
+                {% for new in clicked_news[0] %}
+                
+                <div class="col-md-6">
+                    <div class="card card-body">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-350 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-success">{{ new['category'] }}</strong>
+                            <h3 class="mb-0">{{ new['title'] }}</h3>
+                            <div class="mb-1 text-muted">Nov 11</div>
+                            <p class="mb-auto">{{ new['abstract'] }}</p>
+                            <a href="{{ url_for('new', url=new['url'], title=new['title']) }}" class="stretched-link">Continue reading</a>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img class="d-block m-auto" src="{{ new['image_url'] }}" alt="{{ new['title'] }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        
+        {% for group in clicked_news[1:] %}
+            <div class="carousel-item">
+                <div class="row mb-2">
+
+                    {% for new in group %}
+                    <div class="col-md-6">
+                        <div class="card card-body">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-350 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-success">{{ new['category'] }}</strong>
+                                <h3 class="mb-0">{{ new['title'] }}</h3>
+                                <div class="mb-1 text-muted">Nov 11</div>
+                                <p class="mb-auto">{{ new['abstract'] }}</p>
+                                <a href="{{ url_for('new', url=new['url'], title=new['title']) }}" class="stretched-link">Continue reading</a>
+                                </div>
+                                <div class="col-auto d-none d-lg-block">
+                                    <img class="d-block m-auto" src="{{ new['image_url'] }}" alt="{{ new['title'] }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  
+    <a class="carousel-control-prev w-auto" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next w-auto" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+    </a>
+</div>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block head %}
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+    <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/get_timestamps.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recommendation.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <h1 class="display-4">Recomendación</h1>
+    <div class="row mb-2">
+        <div class="col-md-6 px-4">
+            
+            <p class="lead my-3">Completando la información de la derecha se podrá recibir una recomendación personalizada.</p>
+            <p class="lead my-3">En la parte inferior se puede ver, las noticias que previamente ha visto el usuario y debajo ordenadas se mostrarán las noticias recomendadas.</p>
+        </div>
+        <div class="col-md-6 px-5">
+            <h1 class="display-4"></h1>
+            <form id="rec_form">
+                <div class="py-3">
+                    <label for="selectUser" class='pb-2'>Usuario:</label>
+                    <input name="user" type="text" class="form-select py-2" id="selectUser" list="users" placeholder="Selecciona Usuario">
+                    <datalist id="users">
+                        {% for user in random_users %}
+                        <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+                
+                <div class='py-3'>
+                    <label for="selectTimestamp" class='pb-2'>Timestamp:</label>
+                    <select name="timestamp" id="selectTimestamp" class="form-select py-2" aria-label="Timestamp">
+                        <option selected>Selecciona el timestamp</option>
+                    </select>
+                </div>
+
+                <div class='py-3'>
+                  <label for="selectAlg1" class='pb-2'>Algoritmo 1:</label>
+                  <select name="algorithm1" id="selectAlg1" class="form-select py-2" aria-label="Algoritmo 1">
+                      <option value="nrms">NRMS</option>
+                      <option value="naml">NAML</option>
+                      <option value="lstur">LSTUR</option>
+                      <option value="tfidf">TF-IDF</option>
+                      <option value="count">Frequency (counter)</option>
+                  </select>
+                </div>
+                <div class='py-3'>
+                  <label for="selectAlg2" class='pb-2'>Algoritmo 2:</label>
+                  <select name="algorithm2" id="selectAlg2" class="form-select py-2" aria-label="Algoritmo 2">
+                      <option value="naml">NAML</option>
+                      <option value="nrms">NRMS</option>
+                      <option value="lstur">LSTUR</option>
+                      <option value="tfidf">TF-IDF</option>
+                      <option value="count">Frequency (counter)</option>
+                  </select>
+                </div>
+
+                <div class='py-3'>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="carouselClicked">
+
+</div>
+
+<div class="row" id="algorithm_comparison">
+
+</div>
+
+
+
+{% endblock %}

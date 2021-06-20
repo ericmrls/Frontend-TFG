@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4">Bienvenido</h1>
+    <p class="lead my-3">Página web demostración del Trabajo de Fin de Grado de Eric Morales Agostinho.</p>
+    <p class="lead my-3">Se trata de una página web con un backend programado en Python utilizando el framework Flask.</p>
+    <p class="lead my-3">El esqueleto HTML/CSS esta basado en la plantilla <a href="https://getbootstrap.com/docs/5.0/examples/blog/" class="text-white fw-bold">Blog de Bootstrap</a>.</p>
+  </div>
+</div>
+<div class="row mb-2">
+  {% for new in news %}
+  <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-350 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-success">{{ new['category'] }}</strong>
+        <h3 class="mb-0">{{ new['title'] }}</h3>
+        <div class="mb-1 text-muted">Nov 11</div>
+        <p class="mb-auto">{{ new['abstract'] }}</p>
+        <a href="{{ url_for('new', url=new['url'], title=new['title'], abstract=new['abstract']) }}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img class="d-block m-auto" src="{{ new['image_url'] }}" alt="{{ new['title'] }}">
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  
+
+</div>
+{% endblock %}
